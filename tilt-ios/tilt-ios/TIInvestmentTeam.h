@@ -11,6 +11,6 @@
 @interface TIInvestmentTeam : NSObject
 
 @property (nonatomic, weak) NSString *name;
-@property (nonatomic) double percentInvested;
+@property (nonatomic, weak) NSNumber *percentInvested;
 
 @end

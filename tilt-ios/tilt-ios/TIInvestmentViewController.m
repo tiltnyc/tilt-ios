@@ -25,27 +25,27 @@
     {
         TIInvestmentTeam *team1 = [[TIInvestmentTeam alloc] init];
         team1.name = @"Team 1";
-        team1.percentInvested = 35;
+        team1.percentInvested = [NSNumber numberWithInt:35];
         
         TIInvestmentTeam *team2 = [[TIInvestmentTeam alloc] init];
         team2.name = @"Team 2";
-        team2.percentInvested = 20;
+        team2.percentInvested = [NSNumber numberWithInt:20];
         
         TIInvestmentTeam *team3 = [[TIInvestmentTeam alloc] init];
         team3.name = @"Team 3";
-        team3.percentInvested = 10;
+        team3.percentInvested = [NSNumber numberWithInt:10];
         
         TIInvestmentTeam *team4 = [[TIInvestmentTeam alloc] init];
         team4.name = @"Team 4";
-        team4.percentInvested = 5;
+        team4.percentInvested = [NSNumber numberWithInt:5];
         
         TIInvestmentTeam *team5 = [[TIInvestmentTeam alloc] init];
         team5.name = @"Team 5";
-        team5.percentInvested = 0;
+        team5.percentInvested = [NSNumber numberWithInt:0];
         
         TIInvestmentTeam *team6 = [[TIInvestmentTeam alloc] init];
         team6.name = @"Team 6";
-        team6.percentInvested = 0;
+        team6.percentInvested = [NSNumber numberWithInt:0];
         
         _teams = [[NSArray alloc]initWithObjects:team1, team2, team3, team4, team5, team6, nil];
     }
@@ -71,7 +71,16 @@
     }
     
     TIInvestmentTeam *teamInvestment = [self.teams objectAtIndex:indexPath.row];
-    cell.textLabel.text = teamInvestment.name;
+
+    NSLog(@"Value of investment: %@", teamInvestment.percentInvested);
+    
+    UILabel *teamName = (UILabel *)[cell viewWithTag:1];
+    UILabel *investmentPercent = (UILabel *)[cell viewWithTag:2];
+    UISlider *investmentSlider = (UISlider *)[cell viewWithTag:3];
+    
+    teamName.text = teamInvestment.name;
+    investmentPercent.text = [NSString stringWithFormat:@"%@",teamInvestment.percentInvested];
+    investmentSlider.value = [teamInvestment.percentInvested floatValue];
     
     return cell;
 }
