@@ -8,57 +8,38 @@
 
 #import "TiltInvestorViewController.h"
 
+@interface TiltInvestorViewController()
+
+@property (weak, nonatomic) IBOutlet UITextField *usernameField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
+
+@end
+
 @implementation TiltInvestorViewController
+@synthesize usernameField = _usernameField;
+@synthesize passwordField = _passwordField;
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-	[super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-    } else {
-        return YES;
+- (IBAction)onSigninPressed:(id)sender {
+    
+    NSLog(@"Logging in with user %g", self.usernameField.text);
+    NSLog(@"Logging in with password %g", self.usernameField.text);
+    
+    if( [self.usernameField.text length] > 0
+       && [self.passwordField.text length] > 0 )
+    {
+        [self performSegueWithIdentifier:@"LoginSuccess" sender:self];
     }
+    else
+    {
+        [self performSegueWithIdentifier:@"LoginFailed" sender:self];
+    }
+    
+}
+
+- (void)viewDidUnload {
+    [self setUsernameField:nil];
+    [self setPasswordField:nil];
+    [super viewDidUnload];
 }
 
 @end
