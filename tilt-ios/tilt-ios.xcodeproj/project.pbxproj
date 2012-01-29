@@ -15,8 +15,8 @@
 		8C9363D814D47A81004862E0 /* TiltInvestorAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9363D714D47A81004862E0 /* TiltInvestorAppDelegate.m */; };
 		8C9363DB14D47A81004862E0 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C9363D914D47A81004862E0 /* MainStoryboard_iPhone.storyboard */; };
 		8C9363DE14D47A81004862E0 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C9363DC14D47A81004862E0 /* MainStoryboard_iPad.storyboard */; };
-		8C9363E114D47A81004862E0 /* TiltInvestorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9363E014D47A81004862E0 /* TiltInvestorViewController.m */; };
-		8C9363EF14D4868E004862E0 /* TiltLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9363EE14D4868E004862E0 /* TiltLoginViewController.m */; };
+		8C9363E114D47A81004862E0 /* TiltLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9363E014D47A81004862E0 /* TiltLoginViewController.m */; };
+		8C9363EF14D4868E004862E0 /* TiltTeamInvestmentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9363EE14D4868E004862E0 /* TiltTeamInvestmentsViewController.m */; };
 		8C9363F214D48C29004862E0 /* TIInvestmentTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9363F114D48C29004862E0 /* TIInvestmentTeam.m */; };
 		8C9363FD14D59638004862E0 /* TIInvestmentsFinalizedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9363FC14D59638004862E0 /* TIInvestmentsFinalizedViewController.m */; };
 		8C93640014D59651004862E0 /* TIInvesmentsFailedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9363FF14D59651004862E0 /* TIInvesmentsFailedViewController.m */; };
@@ -80,10 +80,10 @@
 		8C9363D714D47A81004862E0 /* TiltInvestorAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TiltInvestorAppDelegate.m; sourceTree = "<group>"; };
 		8C9363DA14D47A81004862E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		8C9363DD14D47A81004862E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		8C9363DF14D47A81004862E0 /* TiltInvestorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TiltInvestorViewController.h; sourceTree = "<group>"; };
-		8C9363E014D47A81004862E0 /* TiltInvestorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TiltInvestorViewController.m; sourceTree = "<group>"; };
-		8C9363ED14D4868E004862E0 /* TiltLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiltLoginViewController.h; sourceTree = "<group>"; };
-		8C9363EE14D4868E004862E0 /* TiltLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiltLoginViewController.m; sourceTree = "<group>"; };
+		8C9363DF14D47A81004862E0 /* TiltLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TiltLoginViewController.h; sourceTree = "<group>"; };
+		8C9363E014D47A81004862E0 /* TiltLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TiltLoginViewController.m; sourceTree = "<group>"; };
+		8C9363ED14D4868E004862E0 /* TiltTeamInvestmentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiltTeamInvestmentsViewController.h; sourceTree = "<group>"; };
+		8C9363EE14D4868E004862E0 /* TiltTeamInvestmentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiltTeamInvestmentsViewController.m; sourceTree = "<group>"; };
 		8C9363F014D48C29004862E0 /* TIInvestmentTeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIInvestmentTeam.h; sourceTree = "<group>"; };
 		8C9363F114D48C29004862E0 /* TIInvestmentTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIInvestmentTeam.m; sourceTree = "<group>"; };
 		8C9363FB14D59638004862E0 /* TIInvestmentsFinalizedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIInvestmentsFinalizedViewController.h; sourceTree = "<group>"; };
@@ -164,11 +164,11 @@
 				8C9363D714D47A81004862E0 /* TiltInvestorAppDelegate.m */,
 				8C9363D914D47A81004862E0 /* MainStoryboard_iPhone.storyboard */,
 				8C9363DC14D47A81004862E0 /* MainStoryboard_iPad.storyboard */,
-				8C9363DF14D47A81004862E0 /* TiltInvestorViewController.h */,
-				8C9363E014D47A81004862E0 /* TiltInvestorViewController.m */,
+				8C9363DF14D47A81004862E0 /* TiltLoginViewController.h */,
+				8C9363E014D47A81004862E0 /* TiltLoginViewController.m */,
 				8C9363CE14D47A81004862E0 /* Supporting Files */,
-				8C9363ED14D4868E004862E0 /* TiltLoginViewController.h */,
-				8C9363EE14D4868E004862E0 /* TiltLoginViewController.m */,
+				8C9363ED14D4868E004862E0 /* TiltTeamInvestmentsViewController.h */,
+				8C9363EE14D4868E004862E0 /* TiltTeamInvestmentsViewController.m */,
 				8C9363FB14D59638004862E0 /* TIInvestmentsFinalizedViewController.h */,
 				8C9363FC14D59638004862E0 /* TIInvestmentsFinalizedViewController.m */,
 			);
@@ -310,8 +310,8 @@
 			files = (
 				8C9363D414D47A81004862E0 /* main.m in Sources */,
 				8C9363D814D47A81004862E0 /* TiltInvestorAppDelegate.m in Sources */,
-				8C9363E114D47A81004862E0 /* TiltInvestorViewController.m in Sources */,
-				8C9363EF14D4868E004862E0 /* TiltLoginViewController.m in Sources */,
+				8C9363E114D47A81004862E0 /* TiltLoginViewController.m in Sources */,
+				8C9363EF14D4868E004862E0 /* TiltTeamInvestmentsViewController.m in Sources */,
 				8C9363F214D48C29004862E0 /* TIInvestmentTeam.m in Sources */,
 				8C9363FD14D59638004862E0 /* TIInvestmentsFinalizedViewController.m in Sources */,
 				8C93640014D59651004862E0 /* TIInvesmentsFailedViewController.m in Sources */,

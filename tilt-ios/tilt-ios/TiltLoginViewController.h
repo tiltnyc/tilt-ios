@@ -1,5 +1,5 @@
 //
-//  TIInvestmentViewController.h
+//  TiltInvestorViewController.h
 //  tilt-ios
 //
 //  Created by Adam Parrish on 1/28/12.
@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RestKit/RestKit.h>
 
-@interface TiltLoginViewController : UITableViewController
+@interface TiltLoginViewController : UIViewController  <RKObjectLoaderDelegate>
 
-@property (nonatomic, strong) NSArray *teams;
 
 @end

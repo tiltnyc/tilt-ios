@@ -6,18 +6,17 @@
 //  Copyright (c) 2012 Neosavvy. All rights reserved.
 //
 
-#import "TIInvestmentViewController.h"
+#import "TiltTeamInvestmentsViewController.h"
 #import "TIInvestmentTeam.h"
 
-@interface TIInvestmentViewController()
+@interface TiltTeamInvestmentsViewController()
 
-@property (nonatomic, strong) NSArray *teams;
 @property (nonatomic) NSInteger cellTag;
 @property (nonatomic) BOOL navSimulator;
 
 @end
 
-@implementation TIInvestmentViewController
+@implementation TiltTeamInvestmentsViewController
 
 @synthesize teams = _teams;
 @synthesize cellTag = _cellTag;
@@ -30,6 +29,22 @@
         _cellTag = 1000;
     }
     return _cellTag;
+}
+
+-(void) setTeams:(NSArray *)teams
+{
+    if( teams ) 
+    {
+        _teams = teams;
+        
+        TIInvestmentTeam *team;
+        for (int i = 0; i < [self.teams count]; i++)
+        {
+            team = [self.teams objectAtIndex:i];
+            NSLog(@">>>>>>>>Loaded team id #%@ -> Name: %@", team.identifier, team.name);
+        }
+
+    }
 }
 
 -(NSArray *) teams 
@@ -166,7 +181,18 @@
     
     TIInvestmentTeam *teamInvestment = [self.teams objectAtIndex:indexPath.row];
 
-    NSLog(@"Value of investment: %@", teamInvestment.percentInvested);
+    NSLog(@"Value of investment: %@", teamInvestment.percentInvested); //this property is missing from the data coming from the server
+    NSLog(@"Loaded team id #%@ -> Name: %@", teamInvestment.identifier, teamInvestment.name);
+
+    TIInvestmentTeam *team;
+    for (int i = 0; i < [self.teams count]; i++)
+    {
+        team = [self.teams objectAtIndex:i];
+        NSLog(@"Loaded team id #%@ -> Name: %@", team.identifier, team.name);
+    }
+    
+
+    
     
     UILabel *teamName = (UILabel *)[cell viewWithTag:1];
     UILabel *investmentPercent = (UILabel *)[cell viewWithTag:2];
