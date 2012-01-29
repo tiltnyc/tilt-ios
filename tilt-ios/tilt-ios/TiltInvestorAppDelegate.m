@@ -16,6 +16,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    RKClient* client = [RKClient clientWithBaseURL:@"http://tiltnyc.herokuapp.com"];  
+    NSLog(@"I am your RKClient singleton : %@", [RKClient sharedClient]);
+    NSLog(@"Client mem address: %@", client);
+    
     return YES;
 }
 							

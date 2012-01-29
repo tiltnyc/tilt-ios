@@ -10,6 +10,7 @@
 
 @implementation TIInvestmentTeam
 
+@synthesize identifier = _identifier;
 @synthesize name = _name;
 @synthesize percentInvested = _percentInvested;
 

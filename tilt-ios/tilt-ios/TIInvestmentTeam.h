@@ -7,9 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <RestKit/RestKit.h>
 
-@interface TIInvestmentTeam : NSObject
+@interface TIInvestmentTeam : NSObject {
+    
+}
 
+@property (nonatomic, weak) NSNumber *identifier;
 @property (nonatomic, weak) NSString *name;
 @property (nonatomic, weak) NSNumber *percentInvested;
 
