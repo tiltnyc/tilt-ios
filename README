@@ -1,1 +1,4 @@
 This is the top level directory for our ios apps
+
+To install RestKit I followed the instructions here:
+https://github.com/RestKit/RestKit/wiki/Installing-RestKit-in-Xcode-4.x
