@@ -87,7 +87,7 @@
         [addNewBtn setFrame:CGRectMake(10, 0, 300, 50)];
         
         //set title, font size and font color
-        [addNewBtn setTitle:@"Submit Investments" forState:UIControlStateNormal];
+        [addNewBtn setTitle:@"make investments" forState:UIControlStateNormal];
         [addNewBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
         [addNewBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [addNewBtn addTarget:self action:@selector(finalizeInvestments:) forControlEvents:UIControlEventTouchUpInside];

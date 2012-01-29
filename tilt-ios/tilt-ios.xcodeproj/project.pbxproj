@@ -18,6 +18,8 @@
 		8C9363E114D47A81004862E0 /* TiltInvestorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9363E014D47A81004862E0 /* TiltInvestorViewController.m */; };
 		8C9363EF14D4868E004862E0 /* TIInvestmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9363EE14D4868E004862E0 /* TIInvestmentViewController.m */; };
 		8C9363F214D48C29004862E0 /* TIInvestmentTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9363F114D48C29004862E0 /* TIInvestmentTeam.m */; };
+		8C9363FD14D59638004862E0 /* TIInvestmentsFinalizedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9363FC14D59638004862E0 /* TIInvestmentsFinalizedViewController.m */; };
+		8C93640014D59651004862E0 /* TIInvesmentsFailedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9363FF14D59651004862E0 /* TIInvesmentsFailedViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,10 @@
 		8C9363EE14D4868E004862E0 /* TIInvestmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIInvestmentViewController.m; sourceTree = "<group>"; };
 		8C9363F014D48C29004862E0 /* TIInvestmentTeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIInvestmentTeam.h; sourceTree = "<group>"; };
 		8C9363F114D48C29004862E0 /* TIInvestmentTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIInvestmentTeam.m; sourceTree = "<group>"; };
+		8C9363FB14D59638004862E0 /* TIInvestmentsFinalizedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIInvestmentsFinalizedViewController.h; sourceTree = "<group>"; };
+		8C9363FC14D59638004862E0 /* TIInvestmentsFinalizedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIInvestmentsFinalizedViewController.m; sourceTree = "<group>"; };
+		8C9363FE14D59651004862E0 /* TIInvesmentsFailedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIInvesmentsFailedViewController.h; sourceTree = "<group>"; };
+		8C9363FF14D59651004862E0 /* TIInvesmentsFailedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIInvesmentsFailedViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +91,8 @@
 		8C9363CD14D47A81004862E0 /* tilt-ios */ = {
 			isa = PBXGroup;
 			children = (
+				8C9363FE14D59651004862E0 /* TIInvesmentsFailedViewController.h */,
+				8C9363FF14D59651004862E0 /* TIInvesmentsFailedViewController.m */,
 				8C9363D614D47A81004862E0 /* TiltInvestorAppDelegate.h */,
 				8C9363D714D47A81004862E0 /* TiltInvestorAppDelegate.m */,
 				8C9363D914D47A81004862E0 /* MainStoryboard_iPhone.storyboard */,
@@ -96,6 +104,8 @@
 				8C9363EE14D4868E004862E0 /* TIInvestmentViewController.m */,
 				8C9363F014D48C29004862E0 /* TIInvestmentTeam.h */,
 				8C9363F114D48C29004862E0 /* TIInvestmentTeam.m */,
+				8C9363FB14D59638004862E0 /* TIInvestmentsFinalizedViewController.h */,
+				8C9363FC14D59638004862E0 /* TIInvestmentsFinalizedViewController.m */,
 			);
 			path = "tilt-ios";
 			sourceTree = "<group>";
@@ -180,6 +190,8 @@
 				8C9363E114D47A81004862E0 /* TiltInvestorViewController.m in Sources */,
 				8C9363EF14D4868E004862E0 /* TIInvestmentViewController.m in Sources */,
 				8C9363F214D48C29004862E0 /* TIInvestmentTeam.m in Sources */,
+				8C9363FD14D59638004862E0 /* TIInvestmentsFinalizedViewController.m in Sources */,
+				8C93640014D59651004862E0 /* TIInvesmentsFailedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
