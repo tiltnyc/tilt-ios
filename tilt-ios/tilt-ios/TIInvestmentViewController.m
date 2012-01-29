@@ -66,9 +66,12 @@
 
 #pragma mark - Table view data source
 
-- (void)addNew:(id)sender {
-    NSLog(@"Touched.");
+- (void)finalizeInvestments:(id)sender {
+    //[self performSegueWithIdentifier:@"InvestmentsFinalized" sender:self];
+    
+    [self performSegueWithIdentifier:@"InvestmentsFailed" sender:self];
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -87,7 +90,7 @@
         [addNewBtn setTitle:@"Submit Investments" forState:UIControlStateNormal];
         [addNewBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
         [addNewBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [addNewBtn addTarget:self action:@selector(addNew:) forControlEvents:UIControlEventTouchUpInside];
+        [addNewBtn addTarget:self action:@selector(finalizeInvestments:) forControlEvents:UIControlEventTouchUpInside];
                 
         //add the button to the view
         [footerView addSubview:addNewBtn];
@@ -168,6 +171,8 @@
     
     return cell;
 }
+
+
 
 
 @end

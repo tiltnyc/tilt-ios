@@ -52,7 +52,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="361" y="-275"/>
+            <point key="canvasLocation" x="392" y="-275"/>
         </scene>
         <scene sceneID="EnP-1l-Da2">
             <objects>
@@ -101,9 +101,44 @@
                     <navigationItem key="navigationItem" title="investments by team" id="5Bi-GS-S8X">
                         <barButtonItem key="backBarButtonItem" title="logout" id="gZH-HE-Gbu"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="six-QB-fas" kind="push" identifier="InvestmentsFailed" id="oH0-Sc-WoM"/>
+                        <segue destination="jkq-Ew-MZc" kind="push" identifier="InvestmentsFinalized" id="hRg-fc-Res"/>
+                    </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="843" y="-268"/>
+            <point key="canvasLocation" x="861" y="-275"/>
+        </scene>
+        <scene sceneID="29G-Ee-1h2">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G6t-lm-5cS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="jkq-Ew-MZc" customClass="TIInvestmentsFinalizedViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZrQ-1X-chd">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ody-os-dt0">
+                                <rect key="frame" x="20" y="359" width="280" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="cool get me outta here...">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="userAcknowledgeInvestments:" destination="jkq-Ew-MZc" eventType="touchUpInside" id="8Ln-UR-0jh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Anq-Kn-C0w"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1328" y="-275"/>
         </scene>
         <scene sceneID="3Je-8f-svF">
             <objects>
@@ -128,7 +163,7 @@
                     </navigationItem>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="843" y="308"/>
+            <point key="canvasLocation" x="861" y="359"/>
         </scene>
         <scene sceneID="NPY-2R-8Z6">
             <objects>
@@ -145,12 +180,49 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-87" y="-275"/>
+            <point key="canvasLocation" x="-74" y="-275"/>
+        </scene>
+        <scene sceneID="TTL-Bx-MKD">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UG1-B8-c3l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="six-QB-fas" customClass="TIInvesmentsFailedViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RwP-6b-ru4">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="G99-Xn-K3A">
+                                <rect key="frame" x="20" y="359" width="280" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="bummer... let me try again">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="userAcknolwedgedFailure:" destination="six-QB-fas" eventType="touchUpInside" id="mLX-l3-OAl"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Mkz-8P-ICw"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1328" y="359"/>
         </scene>
     </scenes>
     <classes>
+        <class className="TIInvesmentsFailedViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TIInvesmentsFailedViewController.h"/>
+        </class>
         <class className="TIInvestmentViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TIInvestmentViewController.h"/>
+        </class>
+        <class className="TIInvestmentsFinalizedViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TIInvestmentsFinalizedViewController.h"/>
         </class>
         <class className="TiltInvestorViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TiltInvestorViewController.h"/>
