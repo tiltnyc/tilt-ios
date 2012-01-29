@@ -7,6 +7,7 @@
 //
 
 #import "TiltInvestorAppDelegate.h"
+#import <RestKit/RestKit.h>
 
 @implementation TiltInvestorAppDelegate
 
