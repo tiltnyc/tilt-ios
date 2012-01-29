@@ -12,12 +12,23 @@
 @interface TIInvestmentViewController()
 
 @property (nonatomic, strong) NSArray *teams;
+@property (nonatomic) NSInteger cellTag;
 
 @end
 
 @implementation TIInvestmentViewController
 
 @synthesize teams = _teams;
+@synthesize cellTag = _cellTag;
+
+-(NSInteger) cellTag 
+{
+    if( _cellTag < 1000 )
+    {
+        _cellTag = 1000;
+    }
+    return _cellTag;
+}
 
 -(NSArray *) teams 
 {
@@ -61,6 +72,32 @@
     return [self.teams count];
 }
 
+-(void)sliderUpdate:(UISlider *)sender {
+    NSLog(@"test moving the slider");
+    
+    if( [sender isKindOfClass:[UISlider class]] )
+    {
+        
+        //get the cell from the slider somehow
+        //use that to lookup the index of the item to update
+        
+        UISlider *callingSlider = sender;
+        UITableViewCell *cell = (UITableViewCell *)callingSlider.superview;
+        int cellTag = cell.tag;
+        NSLog(@"cellTag: %i", cellTag);
+        if( cellTag >= 1000 )
+        {
+            int index = cellTag - 1000;
+            TIInvestmentTeam *team = [[self teams] objectAtIndex:index];
+            team.percentInvested = [NSNumber numberWithInt:[callingSlider value]];
+            NSLog(@"Value of percentInvested=%@",[NSNumber numberWithInt:[callingSlider value]]);
+            
+            UILabel *investmentPercent = (UILabel *)[[cell superview] viewWithTag:2];
+            investmentPercent.text = [NSString stringWithFormat:@"%@",[NSNumber numberWithInt:[callingSlider value]]];
+        }
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"InvestmentTeamDescription"; //Same as the one defined in the prototype cell's identifier
@@ -70,6 +107,14 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
+    if( cell.tag == 0 )
+    {
+        cell.tag = self.cellTag;
+        cell.contentView.tag = self.cellTag;
+        self.cellTag++;
+        
+    }
+    
     TIInvestmentTeam *teamInvestment = [self.teams objectAtIndex:indexPath.row];
 
     NSLog(@"Value of investment: %@", teamInvestment.percentInvested);
@@ -77,6 +122,8 @@
     UILabel *teamName = (UILabel *)[cell viewWithTag:1];
     UILabel *investmentPercent = (UILabel *)[cell viewWithTag:2];
     UISlider *investmentSlider = (UISlider *)[cell viewWithTag:3];
+    
+    [investmentSlider addTarget:self action:@selector(sliderUpdate:) forControlEvents:UIControlEventValueChanged];
     
     teamName.text = teamInvestment.name;
     investmentPercent.text = [NSString stringWithFormat:@"%@",teamInvestment.percentInvested];
