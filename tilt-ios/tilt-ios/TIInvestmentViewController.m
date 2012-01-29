@@ -66,6 +66,38 @@
 
 #pragma mark - Table view data source
 
+- (void)addNew:(id)sender {
+    NSLog(@"Touched.");
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    if(self.tableView.tableFooterView == nil) {
+        //allocate the view if it doesn't exist yet
+        UIView *footerView  = [[UIView alloc] init];
+        [footerView setFrame:CGRectMake(0, 0, 320, 80)];
+        
+        //create the button
+        UIButton *addNewBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];     
+        //the button should be as big as a table view cell
+        [addNewBtn setFrame:CGRectMake(10, 0, 300, 50)];
+        
+        //set title, font size and font color
+        [addNewBtn setTitle:@"Submit Investments" forState:UIControlStateNormal];
+        [addNewBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
+        [addNewBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [addNewBtn addTarget:self action:@selector(addNew:) forControlEvents:UIControlEventTouchUpInside];
+                
+        //add the button to the view
+        [footerView addSubview:addNewBtn];
+        footerView.userInteractionEnabled = YES;
+        self.tableView.tableFooterView = footerView;
+        self.tableView.tableFooterView.userInteractionEnabled = YES;
+        
+    }
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -96,6 +128,11 @@
             investmentPercent.text = [NSString stringWithFormat:@"%@",[NSNumber numberWithInt:[callingSlider value]]];
         }
     }
+}
+
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return nil; //enables the header view
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
