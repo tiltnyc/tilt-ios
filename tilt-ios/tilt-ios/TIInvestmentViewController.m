@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) NSArray *teams;
 @property (nonatomic) NSInteger cellTag;
+@property (nonatomic) BOOL navSimulator;
 
 @end
 
@@ -20,6 +21,7 @@
 
 @synthesize teams = _teams;
 @synthesize cellTag = _cellTag;
+@synthesize navSimulator = _navSimulator;
 
 -(NSInteger) cellTag 
 {
@@ -64,12 +66,19 @@
     return _teams;
 }
 
-#pragma mark - Table view data source
 
 - (void)finalizeInvestments:(id)sender {
-    //[self performSegueWithIdentifier:@"InvestmentsFinalized" sender:self];
     
-    [self performSegueWithIdentifier:@"InvestmentsFailed" sender:self];
+    if( self.navSimulator == YES )
+    {
+        self.navSimulator = NO;
+        [self performSegueWithIdentifier:@"InvestmentsFinalized" sender:self];
+    }
+    else
+    {
+        self.navSimulator = YES;
+        [self performSegueWithIdentifier:@"InvestmentsFailed" sender:self];
+    }
 }
 
 
