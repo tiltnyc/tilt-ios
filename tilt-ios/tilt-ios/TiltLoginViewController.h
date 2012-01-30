@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <RestKit/RestKit.h>
 
-@interface TiltLoginViewController : UIViewController  <RKObjectLoaderDelegate>
+@interface TiltLoginViewController : UIViewController
 
 
 @end

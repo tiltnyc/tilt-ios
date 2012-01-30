@@ -13,12 +13,13 @@
 
 @property (nonatomic) NSInteger cellTag;
 @property (nonatomic) BOOL navSimulator;
+@property (nonatomic, strong) NSArray *teams;
 
 @end
 
 @implementation TiltTeamInvestmentsViewController
 
-@synthesize teams = _teams;
+@synthesize teams;
 @synthesize cellTag = _cellTag;
 @synthesize navSimulator = _navSimulator;
 
@@ -29,56 +30,6 @@
         _cellTag = 1000;
     }
     return _cellTag;
-}
-
--(void) setTeams:(NSArray *)teams
-{
-    if( teams ) 
-    {
-        _teams = teams;
-        
-        TIInvestmentTeam *team;
-        for (int i = 0; i < [self.teams count]; i++)
-        {
-            team = [self.teams objectAtIndex:i];
-            NSLog(@">>>>>>>>Loaded team id #%@ -> Name: %@", team.identifier, team.name);
-        }
-
-    }
-}
-
--(NSArray *) teams 
-{
-    if(!_teams)
-    {
-        TIInvestmentTeam *team1 = [[TIInvestmentTeam alloc] init];
-        team1.name = @"Team 1";
-        team1.percentInvested = [NSNumber numberWithInt:35];
-        
-        TIInvestmentTeam *team2 = [[TIInvestmentTeam alloc] init];
-        team2.name = @"Team 2";
-        team2.percentInvested = [NSNumber numberWithInt:20];
-        
-        TIInvestmentTeam *team3 = [[TIInvestmentTeam alloc] init];
-        team3.name = @"Team 3";
-        team3.percentInvested = [NSNumber numberWithInt:10];
-        
-        TIInvestmentTeam *team4 = [[TIInvestmentTeam alloc] init];
-        team4.name = @"Team 4";
-        team4.percentInvested = [NSNumber numberWithInt:5];
-        
-        TIInvestmentTeam *team5 = [[TIInvestmentTeam alloc] init];
-        team5.name = @"Team 5";
-        team5.percentInvested = [NSNumber numberWithInt:0];
-        
-        TIInvestmentTeam *team6 = [[TIInvestmentTeam alloc] init];
-        team6.name = @"Team 6";
-        team6.percentInvested = [NSNumber numberWithInt:0];
-        
-        _teams = [[NSArray alloc]initWithObjects:team1, team2, team3, team4, team5, team6, nil];
-    }
-    
-    return _teams;
 }
 
 
@@ -131,6 +82,7 @@
     return [self.teams count];
 }
 
+
 -(void)sliderUpdate:(UISlider *)sender {
     NSLog(@"test moving the slider");
     
@@ -157,19 +109,18 @@
     }
 }
 
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return nil; //enables the header view
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    
     static NSString *CellIdentifier = @"InvestmentTeamDescription"; //Same as the one defined in the prototype cell's identifier
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    
     
     if( cell.tag == 0 )
     {
@@ -181,19 +132,6 @@
     
     TIInvestmentTeam *teamInvestment = [self.teams objectAtIndex:indexPath.row];
 
-    NSLog(@"Value of investment: %@", teamInvestment.percentInvested); //this property is missing from the data coming from the server
-    NSLog(@"Loaded team id #%@ -> Name: %@", teamInvestment.identifier, teamInvestment.name);
-
-    TIInvestmentTeam *team;
-    for (int i = 0; i < [self.teams count]; i++)
-    {
-        team = [self.teams objectAtIndex:i];
-        NSLog(@"Loaded team id #%@ -> Name: %@", team.identifier, team.name);
-    }
-    
-
-    
-    
     UILabel *teamName = (UILabel *)[cell viewWithTag:1];
     UILabel *investmentPercent = (UILabel *)[cell viewWithTag:2];
     UISlider *investmentSlider = (UISlider *)[cell viewWithTag:3];
@@ -208,6 +146,32 @@
 }
 
 
+- (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObjects:(NSArray *)objects {
+    
+    
+    //    self.teams = [NSArray arrayWithArray:objects];
+    self.teams = objects;
 
+    [[self tableView] reloadData];
+}
+
+- (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error {
+    NSLog(@"Encountered an error: %@", error);
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    
+    RKObjectMapping *objectMapping = [RKObjectMapping mappingForClass:[TIInvestmentTeam class]];
+    [objectMapping mapKeyPath:@"_id" toAttribute:@"identifier"];
+    [objectMapping mapKeyPath:@"name" toAttribute:@"name"];
+    
+    RKClient *client = [RKClient sharedClient];
+    RKObjectManager* manager = [RKObjectManager objectManagerWithBaseURL:client.baseURL];
+    [manager loadObjectsAtResourcePath:@"/teams.json" objectMapping:objectMapping delegate:self];
+    
+    
+    [super viewWillAppear:animated];
+}
 
 @end

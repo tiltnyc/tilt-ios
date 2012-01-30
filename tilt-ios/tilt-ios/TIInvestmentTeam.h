@@ -13,8 +13,8 @@
     
 }
 
-@property (nonatomic, weak) NSNumber *identifier;
-@property (nonatomic, weak) NSString *name;
-@property (nonatomic, weak) NSNumber *percentInvested;
+@property (nonatomic, strong) NSNumber *identifier;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSNumber *percentInvested;
 
 @end

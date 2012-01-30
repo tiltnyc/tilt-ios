@@ -10,8 +10,22 @@
 
 @implementation TIInvestmentTeam
 
-@synthesize identifier = _identifier;
-@synthesize name = _name;
+@synthesize identifier;
+@synthesize name;
 @synthesize percentInvested = _percentInvested;
+
+-(NSNumber *) percentInvested 
+{
+    if( _percentInvested < [NSNumber numberWithInt:0] )
+    {
+        _percentInvested = [NSNumber numberWithInt:0];
+    }
+    if( _percentInvested > [NSNumber numberWithInt:100] )
+    {
+        _percentInvested = [NSNumber numberWithInt:100];
+    }
+    
+    return _percentInvested;
+}
 
 @end

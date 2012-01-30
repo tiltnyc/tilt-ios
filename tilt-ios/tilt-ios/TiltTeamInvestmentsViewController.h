@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RestKit/RestKit.h>
 
-@interface TiltTeamInvestmentsViewController : UITableViewController
+@interface TiltTeamInvestmentsViewController : UITableViewController <RKObjectLoaderDelegate>
 
-@property (nonatomic, strong) NSArray *teams;
+
 
 @end
