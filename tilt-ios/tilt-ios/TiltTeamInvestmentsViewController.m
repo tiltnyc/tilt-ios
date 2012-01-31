@@ -82,6 +82,18 @@
     return [self.teams count];
 }
 
+-(BOOL)checkAllInvestmentsForMaxedOut
+{
+    TIInvestmentTeam *team;
+    NSNumber *totalInvestedPercent = [NSNumber numberWithInt:0];
+    for ( int i = 0; i < teams.count ; i++ )
+    {
+        totalInvestedPercent = [NSNumber numberWithInt:[totalInvestedPercent intValue] + [team.percentInvested intValue]];
+    }
+
+    return (totalInvestedPercent >= [NSNumber numberWithInt:100] ) ? YES : NO;
+}
+
 
 -(void)sliderUpdate:(UISlider *)sender {
     NSLog(@"test moving the slider");
@@ -100,12 +112,16 @@
         {
             int index = cellTag - 1000;
             TIInvestmentTeam *team = [[self teams] objectAtIndex:index];
+            
+            
+            
             team.percentInvested = [NSNumber numberWithInt:[callingSlider value]];
             NSLog(@"Value of percentInvested=%@",[NSNumber numberWithInt:[callingSlider value]]);
-            
+            NSLog(@"Value of team.percentInvested=%@",team.percentInvested);
             UILabel *investmentPercent = (UILabel *)[[cell superview] viewWithTag:2];
             investmentPercent.text = [NSString stringWithFormat:@"%@",[NSNumber numberWithInt:[callingSlider value]]];
         }
+        
     }
 }
 
@@ -139,8 +155,15 @@
     [investmentSlider addTarget:self action:@selector(sliderUpdate:) forControlEvents:UIControlEventValueChanged];
     
     teamName.text = teamInvestment.name;
+    
+    NSLog(@"Team %@ has a investment of value %@", teamInvestment.name, teamInvestment.percentInvested);
+    
     investmentPercent.text = [NSString stringWithFormat:@"%@",teamInvestment.percentInvested];
+    
+    //investmentSlider.minimumValue = 0;
+    //investmentSlider.maximumValue = 100;
     investmentSlider.value = [teamInvestment.percentInvested floatValue];
+
     
     return cell;
 }
