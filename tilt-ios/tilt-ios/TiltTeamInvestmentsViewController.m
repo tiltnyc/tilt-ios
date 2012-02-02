@@ -82,16 +82,51 @@
     return [self.teams count];
 }
 
--(BOOL)checkAllInvestmentsForMaxedOut
+-(NSNumber *) maxAvailableInvestmentLeft
+{
+    TIInvestmentTeam *team;
+    NSNumber *totalInvestedPercent = [NSNumber numberWithInt:0];
+    int total;
+    for ( int i = 0; i < teams.count ; i++ )
+    {
+        team = [teams objectAtIndex:i];
+        total = [totalInvestedPercent intValue];
+        int teamInvestment = [team.percentInvested intValue];
+        total += teamInvestment;
+        NSLog(@"total is %d", total);
+        NSLog(@"team %@ has %@", team.name, team.percentInvested);
+        totalInvestedPercent = [NSNumber numberWithInt:total];
+    }
+    
+    NSLog(@"Returing max available investment of %i",100-total);
+    
+    return [NSNumber numberWithInt:100-total];
+}
+
+-(BOOL)isInvestmentFundsAvailable
 {
     TIInvestmentTeam *team;
     NSNumber *totalInvestedPercent = [NSNumber numberWithInt:0];
     for ( int i = 0; i < teams.count ; i++ )
     {
-        totalInvestedPercent = [NSNumber numberWithInt:[totalInvestedPercent intValue] + [team.percentInvested intValue]];
+        team = [teams objectAtIndex:i];
+        int total = [totalInvestedPercent intValue];
+        int teamInvestment = [team.percentInvested intValue];
+        total += teamInvestment;
+        NSLog(@"total is %d", total);
+        NSLog(@"team %@ has %@", team.name, team.percentInvested);
+        totalInvestedPercent = [NSNumber numberWithInt:total];
     }
+    NSLog(@"totalInvestedPercent is: %@", totalInvestedPercent);
 
-    return (totalInvestedPercent >= [NSNumber numberWithInt:100] ) ? YES : NO;
+    NSComparisonResult result = [totalInvestedPercent compare:[NSNumber numberWithInt:100]];
+    
+    if( result == NSOrderedAscending )
+    {
+        return YES;
+    }
+    
+    return NO;
 }
 
 
@@ -100,26 +135,108 @@
     
     if( [sender isKindOfClass:[UISlider class]] )
     {
-        
-        //get the cell from the slider somehow
-        //use that to lookup the index of the item to update
-        
         UISlider *callingSlider = sender;
         UITableViewCell *cell = (UITableViewCell *)callingSlider.superview;
+        
+        /***
+         * this is hackery. i bet there is a better way to get a hook
+         * back to a cell's ui element aside from using random magic tag math
+         */
         int cellTag = cell.tag;
-        NSLog(@"cellTag: %i", cellTag);
         if( cellTag >= 1000 )
         {
+            
+            BOOL allowUserAction = false;
             int index = cellTag - 1000;
             TIInvestmentTeam *team = [[self teams] objectAtIndex:index];
+            NSNumber *percentToInvest = [NSNumber numberWithInt:[callingSlider value]];
+               
+            //if user is increasing
+            if( [team isIncreasingWith:percentToInvest] )
+            {
+                //make sure they have fund percentage left
+                //if they have funds left - allow
+                //else - disallow 
+                if( [self isInvestmentFundsAvailable] )
+                {
+                    allowUserAction = YES;
+                }
+                else
+                {
+                    allowUserAction = NO;
+                }
+            }
+            else if( [team isDecreasingWith:percentToInvest] )
+            {
+                //if user is decreasing - allow always                
+                allowUserAction = YES;
+            }
+            else
+            {
+                //default allow i guess
+                allowUserAction = YES;
+            }
             
-            
-            
-            team.percentInvested = [NSNumber numberWithInt:[callingSlider value]];
-            NSLog(@"Value of percentInvested=%@",[NSNumber numberWithInt:[callingSlider value]]);
-            NSLog(@"Value of team.percentInvested=%@",team.percentInvested);
-            UILabel *investmentPercent = (UILabel *)[[cell superview] viewWithTag:2];
-            investmentPercent.text = [NSString stringWithFormat:@"%@",[NSNumber numberWithInt:[callingSlider value]]];
+
+            if( allowUserAction )
+            {
+//                NSComparisonResult maxComparedToIntended = [[self maxAvailableInvestmentLeft] compare:percentToInvest];
+//                NSNumber *delta;
+//                if( maxComparedToIntended == NSOrderedAscending )
+//                {
+//                    delta = [self maxAvailableInvestmentLeft];
+//                }
+//                else if( maxComparedToIntended == NSOrderedSame )
+//                {
+//                    delta = [self maxAvailableInvestmentLeft];
+//                }
+//                else if( maxComparedToIntended == NSOrderedDescending )
+//                {
+//                    delta = percentToInvest;
+//                }
+                
+//                if( [team isDecreasingWith:delta] )
+//                {
+//                    team.percentInvested = [NSNumber numberWithInt:[[team percentInvested] intValue] - [delta intValue]];                    
+//                }
+//                else if( [team isIncreasingWith:delta] )
+//                {
+//                    team.percentInvested = [NSNumber numberWithInt:[[team percentInvested] intValue] + [delta intValue]];                    
+//                }
+
+                //if decreasing it is safe to just accept percentToInvest - always
+                if( [team isDecreasingWith:percentToInvest] )
+                {
+                    team.percentInvested = percentToInvest;                    
+                }
+                //if increasing you have to make sure you have room in max available or max available + current is what you get
+                else 
+                {
+                    NSNumber *maxAvailable = [self maxAvailableInvestmentLeft];
+                    NSNumber *maxPlusCurrent = [NSNumber numberWithInt:[maxAvailable intValue] + [team.percentInvested intValue]];
+                    NSLog(@"MaxPlusCurrent: %@, MaxAvail: %@, vs PercentToInvest: %@",maxPlusCurrent, maxAvailable, percentToInvest);
+                    
+                    NSComparisonResult maxPlusCurrentComparedToInvested = [maxPlusCurrent compare:percentToInvest];
+                    if( maxPlusCurrentComparedToInvested == NSOrderedAscending || maxPlusCurrentComparedToInvested == NSOrderedSame )
+                    {
+                        team.percentInvested = maxPlusCurrent;
+                    }
+                    else if( maxPlusCurrentComparedToInvested == NSOrderedDescending )
+                    {
+                        team.percentInvested = percentToInvest;
+                    }
+                }
+                
+
+                
+
+                UILabel *investmentPercent = (UILabel *)[[cell superview] viewWithTag:2];
+                investmentPercent.text = [NSString stringWithFormat:@"%@",team.percentInvested];
+                
+                NSLog(@"Max Available right now is %@",[self maxAvailableInvestmentLeft]);
+                NSLog(@"Value of percentInvested=%@",percentToInvest);
+                NSLog(@"Value of team.percentInvested=%@",team.percentInvested);
+            }
         }
         
     }
