@@ -270,15 +270,30 @@
     NSLog(@"Encountered an error: %@", error);
 }
 
+- (void)reachabilityDidChange:(NSNotification *)notification {
+    RKReachabilityObserver* observer = (RKReachabilityObserver *) [notification object];
+    RKReachabilityNetworkStatus status = [observer networkStatus];
+    if (RKReachabilityNotReachable == status) {
+        RKLogInfo(@"No network access!");
+    } else if (RKReachabilityReachableViaWiFi == status) {
+        RKLogInfo(@"Online via WiFi!");
+    } else if (RKReachabilityReachableViaWWAN == status) {
+        RKLogInfo(@"Online via Edge or 3G!");
+    }
+}
+
 -(void) viewWillAppear:(BOOL)animated
 {
+    
+    NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(reachabilityDidChange:) name:RKReachabilityDidChangeNotification object:nil];
     
     RKObjectMapping *objectMapping = [RKObjectMapping mappingForClass:[TIInvestmentTeam class]];
     [objectMapping mapKeyPath:@"_id" toAttribute:@"identifier"];
     [objectMapping mapKeyPath:@"name" toAttribute:@"name"];
     
-    RKClient *client = [RKClient sharedClient];
-    RKObjectManager* manager = [RKObjectManager objectManagerWithBaseURL:client.baseURL];
+    RKObjectManager* manager = [RKObjectManager sharedManager];
+    [manager.mappingProvider setMapping:objectMapping forKeyPath:@""]; 
     [manager loadObjectsAtResourcePath:@"/teams.json" objectMapping:objectMapping delegate:self];
     
     

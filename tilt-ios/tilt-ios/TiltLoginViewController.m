@@ -39,13 +39,13 @@
     [objectMapping mapKeyPath:@"username" toAttribute:@"username"];
     [objectMapping mapKeyPath:@"email" toAttribute:@"email"];
     [objectMapping mapKeyPath:@"funds" toAttribute:@"funds"];
-    
+
 
     
     RKClient *client = [RKClient sharedClient];
     RKObjectManager* manager = [RKObjectManager objectManagerWithBaseURL:client.baseURL];
     [manager.mappingProvider setMapping:objectMapping forKeyPath:@""]; 
-    
+        
     user = [[TiltUser alloc] init];
     user.username = self.usernameField.text;
     user.password = self.passwordField.text;
@@ -119,6 +119,11 @@
         if ([response isJSON]) {  
             NSLog(@"Got a JSON response back from our POST! %@ %@", user.identifier, user.email);  
             NSLog(@"Retrieved XML: %@", [response bodyAsString]);  
+            NSArray *cookies = response.cookies;
+            for ( int i =0; i < cookies.count ; i++ )
+            {
+                [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:[cookies objectAtIndex:i]]; 
+            }
         }  
         
     } else if ([request isDELETE]) {  

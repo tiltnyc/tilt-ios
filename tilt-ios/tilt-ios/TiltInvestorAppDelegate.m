@@ -21,6 +21,14 @@
     NSLog(@"I am your RKClient singleton : %@", [RKClient sharedClient]);
     NSLog(@"Client mem address: %@", client);
     
+    RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
+    RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
+
+    RKLogConfigureByName("RestKit/Network/Queue", RKLogLevelTrace);
+    RKLogConfigureByName("RestKit/Network/Reachability", RKLogLevelTrace);
+    
+    client.cachePolicy = RKRequestCachePolicyNone;
+    
     return YES;
 }
 							
