@@ -18,7 +18,9 @@
     // Override point for customization after application launch.
     
     RKClient* client = [RKClient clientWithBaseURL:@"http://tiltnyc.herokuapp.com"];  
+    RKObjectManager* manager = [RKObjectManager objectManagerWithBaseURL:client.baseURL];
     NSLog(@"I am your RKClient singleton : %@", [RKClient sharedClient]);
+    NSLog(@"I am your RKObjectManager singleton: %@", manager);
     NSLog(@"Client mem address: %@", client);
     
     RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);

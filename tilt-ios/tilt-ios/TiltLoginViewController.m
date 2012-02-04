@@ -39,11 +39,8 @@
     [objectMapping mapKeyPath:@"username" toAttribute:@"username"];
     [objectMapping mapKeyPath:@"email" toAttribute:@"email"];
     [objectMapping mapKeyPath:@"funds" toAttribute:@"funds"];
-
-
     
-    RKClient *client = [RKClient sharedClient];
-    RKObjectManager* manager = [RKObjectManager objectManagerWithBaseURL:client.baseURL];
+    RKObjectManager *manager = [RKObjectManager sharedManager];
     [manager.mappingProvider setMapping:objectMapping forKeyPath:@""]; 
         
     user = [[TiltUser alloc] init];
