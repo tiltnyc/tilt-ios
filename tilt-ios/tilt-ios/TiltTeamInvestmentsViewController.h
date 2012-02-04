@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <RestKit/RestKit.h>
+#import "TiltUser.h"
 
 @interface TiltTeamInvestmentsViewController : UITableViewController <RKObjectLoaderDelegate>
 
-
+@property (nonatomic, strong) TiltUser *user;
 
 @end

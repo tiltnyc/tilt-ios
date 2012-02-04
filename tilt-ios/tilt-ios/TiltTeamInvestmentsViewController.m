@@ -22,6 +22,7 @@
 @synthesize teams;
 @synthesize cellTag = _cellTag;
 @synthesize navSimulator = _navSimulator;
+@synthesize user;
 
 -(NSInteger) cellTag 
 {
@@ -180,30 +181,6 @@
 
             if( allowUserAction )
             {
-//                NSComparisonResult maxComparedToIntended = [[self maxAvailableInvestmentLeft] compare:percentToInvest];
-//                NSNumber *delta;
-//                if( maxComparedToIntended == NSOrderedAscending )
-//                {
-//                    delta = [self maxAvailableInvestmentLeft];
-//                }
-//                else if( maxComparedToIntended == NSOrderedSame )
-//                {
-//                    delta = [self maxAvailableInvestmentLeft];
-//                }
-//                else if( maxComparedToIntended == NSOrderedDescending )
-//                {
-//                    delta = percentToInvest;
-//                }
-                
-//                if( [team isDecreasingWith:delta] )
-//                {
-//                    team.percentInvested = [NSNumber numberWithInt:[[team percentInvested] intValue] - [delta intValue]];                    
-//                }
-//                else if( [team isIncreasingWith:delta] )
-//                {
-//                    team.percentInvested = [NSNumber numberWithInt:[[team percentInvested] intValue] + [delta intValue]];                    
-//                }
-
                 //if decreasing it is safe to just accept percentToInvest - always
                 if( [team isDecreasingWith:percentToInvest] )
                 {
@@ -277,8 +254,6 @@
     
     investmentPercent.text = [NSString stringWithFormat:@"%@",teamInvestment.percentInvested];
     
-    //investmentSlider.minimumValue = 0;
-    //investmentSlider.maximumValue = 100;
     investmentSlider.value = [teamInvestment.percentInvested floatValue];
 
     
@@ -287,11 +262,7 @@
 
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObjects:(NSArray *)objects {
-    
-    
-    //    self.teams = [NSArray arrayWithArray:objects];
     self.teams = objects;
-
     [[self tableView] reloadData];
 }
 
