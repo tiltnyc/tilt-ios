@@ -62,15 +62,15 @@
 
 - (void)finalizeInvestments:(id)sender {
     TiltInvestment *investments = [[TiltInvestment alloc] init];
-    investments.round = [NSNumber numberWithInt:1];
+    investments.round = [NSNumber numberWithInt:4];
     
     NSMutableArray *teamInvestments = [[NSMutableArray alloc] init];
 
     for (TIInvestmentTeam *team in teams) {
         
         TiltTeamInvestment *investment = [[TiltTeamInvestment alloc] init];
-        investment.team = team.identifier;
-        investment.percentage = team.percentInvested;
+        investment.team = (NSNumber *)[team.identifier copy];
+        investment.percentage = (NSNumber *)[team.percentInvested copy];
         
         [teamInvestments addObject:investment];
     }

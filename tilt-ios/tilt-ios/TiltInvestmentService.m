@@ -13,18 +13,18 @@
 
 -(void) makeInvestment:(TiltInvestment *)investment
 {
-    RKObjectMapping *tiltTeamInvestmentMapping = [RKObjectMapping mappingForClass:[TiltTeamInvestment class]];
-    [tiltTeamInvestmentMapping mapKeyPath:@"team" toAttribute:@"team"];
-    [tiltTeamInvestmentMapping mapKeyPath:@"percentage" toAttribute:@"percentage"];
-    
-    RKObjectMapping *tiltInvestmentMapping = [RKObjectMapping mappingForClass:[TiltInvestment class]];
-
-    [tiltInvestmentMapping mapKeyPath:@"investments" toRelationship:@"investments" withMapping:tiltTeamInvestmentMapping];
+    RKObjectMapping *tiltInvestmentMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     tiltInvestmentMapping.rootKeyPath = @"investment";
+    [tiltInvestmentMapping mapAttributes:@"round", nil];
+    
+    RKObjectMapping *tiltTeamInvestmentMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+    [tiltTeamInvestmentMapping mapAttributes:@"team", @"percentage", nil];
+    
+    [tiltInvestmentMapping mapRelationship:@"investments" withMapping:tiltTeamInvestmentMapping];
     
     RKObjectManager* manager = [RKObjectManager sharedManager];
-    [manager.mappingProvider setSerializationMapping:[tiltInvestmentMapping inverseMapping] forClass:[TiltInvestment class]];
-    
+    [manager.mappingProvider setSerializationMapping:tiltInvestmentMapping forClass:[TiltInvestment class]];
+
     RKObjectRouter *router = manager.router;
     [router routeClass:[TiltInvestment class] toResourcePath:@"/investments.json" forMethod:RKRequestMethodPOST];
      
