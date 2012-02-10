@@ -8,12 +8,16 @@
 
 #import "TiltTeamInvestmentsViewController.h"
 #import "TIInvestmentTeam.h"
+#import "TiltInvestment.h"
+#import "TiltTeamInvestment.h"
+#import "TiltInvestmentService.h"
 
 @interface TiltTeamInvestmentsViewController()
 
 @property (nonatomic) NSInteger cellTag;
 @property (nonatomic) BOOL navSimulator;
 @property (nonatomic, strong) NSArray *teams;
+@property (nonatomic, strong) TiltInvestmentService *service;
 
 @end
 
@@ -23,6 +27,16 @@
 @synthesize cellTag = _cellTag;
 @synthesize navSimulator = _navSimulator;
 @synthesize user;
+@synthesize service = _service;
+
+-(TiltInvestmentService *) service 
+{
+    if(!_service)
+    {
+        _service = [[TiltInvestmentService alloc] init]; 
+    }
+    return _service;
+}
 
 -(NSInteger) cellTag 
 {
@@ -33,19 +47,36 @@
     return _cellTag;
 }
 
+/**
+ if( self.navSimulator == YES )
+ {
+ self.navSimulator = NO;
+ [self performSegueWithIdentifier:@"InvestmentsFinalized" sender:self];
+ }
+ else
+ {
+ self.navSimulator = YES;
+ [self performSegueWithIdentifier:@"InvestmentsFailed" sender:self];
+ }
+ */
 
 - (void)finalizeInvestments:(id)sender {
+    TiltInvestment *investments = [[TiltInvestment alloc] init];
+    investments.round = [NSNumber numberWithInt:1];
     
-    if( self.navSimulator == YES )
-    {
-        self.navSimulator = NO;
-        [self performSegueWithIdentifier:@"InvestmentsFinalized" sender:self];
+    NSMutableArray *teamInvestments = [[NSMutableArray alloc] init];
+
+    for (TIInvestmentTeam *team in teams) {
+        
+        TiltTeamInvestment *investment = [[TiltTeamInvestment alloc] init];
+        investment.team = team.identifier;
+        investment.percentage = team.percentInvested;
+        
+        [teamInvestments addObject:investment];
     }
-    else
-    {
-        self.navSimulator = YES;
-        [self performSegueWithIdentifier:@"InvestmentsFailed" sender:self];
-    }
+    
+    investments.investments = teamInvestments;
+    [self.service makeInvestment:investments];
 }
 
 

@@ -33,7 +33,6 @@
     NSLog(@"Logging in with user %@", self.usernameField.text);
     NSLog(@"Logging in with password %@", self.passwordField.text);
     
-    
     RKObjectMapping *objectMapping = [RKObjectMapping mappingForClass:[TiltUser class]];
     [objectMapping mapKeyPath:@"_id" toAttribute:@"identifier"];
     [objectMapping mapKeyPath:@"username" toAttribute:@"username"];
@@ -58,8 +57,6 @@
                                         loader.objectMapping = [manager.mappingProvider 
                                                                 objectMappingForClass:[TiltUser class]]; 
                                     }]; 
-    
-    
 }
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error
