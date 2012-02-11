@@ -59,18 +59,14 @@
 
 - (void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response
 {
-    if (response.bodyAsString) {
-        _successBlock();
+    if (![response isError]) {
         NSLog(@"Success"); 
         NSLog(@"Response was: %@", response.bodyAsString);
-
-    }
-    
-    if ([response isError]) {
+        _successBlock();
+    } else {
         NSLog(@"Error Descrip: %@, Error: %@", [response failureErrorDescription], [response failureError]);
         _failBlock();
     }
-    
 }
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObject:(id)object {
