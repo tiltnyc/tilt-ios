@@ -69,19 +69,4 @@
     }
 }
 
-- (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObject:(id)object {
-    DLog(@"Success");
-    _successBlock();
-}
-
-- (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObjects:(NSArray *)objects {
-    DLog(@"Success");
-    _successBlock();
-}
-
-- (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error {
-    DLog(@"Encountered an error: %@", error);
-    _failBlock();
-}
-
 @end
