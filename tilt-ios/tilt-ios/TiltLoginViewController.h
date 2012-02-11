@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <RestKit/RestKit.h>
 
-@interface TiltLoginViewController : UIViewController  <RKObjectLoaderDelegate>
-
+@interface TiltLoginViewController : UIViewController  <RKObjectLoaderDelegate, UITextFieldDelegate>
+{
+    UIView *_keyboardAccessoryView;
+    UITextField *_selectedTextField;
+    UISegmentedControl *_segControl;
+}
 
 @end

@@ -129,6 +129,110 @@
     }  
 }  
 
+#pragma mark -
+#pragma mark Private Functions
+- (UIView*)inputAccessoryView {
+    if(!_keyboardAccessoryView)
+    {
+        UISegmentedControl *tmpSegControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Previous",@"Next", nil]];
+        [tmpSegControl setFrame:CGRectMake(0, 7, 140, 30)];
+        [tmpSegControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+        [tmpSegControl setTintColor:[UIColor darkGrayColor]];
+        [tmpSegControl setMomentary:YES];
+        [tmpSegControl addTarget:self action:@selector(doSegmentedControl:) forControlEvents:UIControlEventAllEvents];    
+        
+        UIBarButtonItem *toolbarSeg = [[UIBarButtonItem alloc] initWithCustomView:tmpSegControl];
+        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doCloseKeyboards:)];
+        
+        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+        [toolbar setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        [toolbar setBarStyle:UIBarStyleBlackTranslucent];
+        [toolbar setItems:[NSArray arrayWithObjects:toolbarSeg, flexibleSpace, doneButton,nil] animated:YES];
+        _keyboardAccessoryView = toolbar;
+    }
+    return _keyboardAccessoryView;
+}
+
+#pragma mark -
+#pragma mark Action Methods
+- (void)doSegmentedControl:(UISegmentedControl *)sender
+{
+    if(sender.selectedSegmentIndex == 0){ // Previous
+        if(_selectedTextField == _usernameField)
+            [_passwordField becomeFirstResponder];
+        else if(_selectedTextField == _passwordField)
+            [_usernameField becomeFirstResponder];
+    }else{ // Next
+        if(_selectedTextField == _usernameField)
+            [_passwordField becomeFirstResponder];
+        else if(_selectedTextField == _passwordField)
+            [_usernameField becomeFirstResponder];
+    }
+}
+
+- (void)doCloseKeyboards:(UIButton *)sender
+{
+    [_selectedTextField resignFirstResponder];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [_usernameField setDelegate:self];
+    [_passwordField setDelegate:self];
+    
+    [_usernameField setInputAccessoryView:[self inputAccessoryView]];
+    [_passwordField setInputAccessoryView:[self inputAccessoryView]];
+}
+
+#pragma mark - 
+#pragma mark UITextFieldDelegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{    
+    _selectedTextField = textField;
+    
+    [_segControl setEnabled:YES forSegmentAtIndex:0];
+    [_segControl setEnabled:YES forSegmentAtIndex:1];
+    if(_selectedTextField == _usernameField){
+        [_segControl setEnabled:NO forSegmentAtIndex:0];
+    }
+    if(_selectedTextField == _passwordField){
+        [_segControl setEnabled:NO forSegmentAtIndex:1];
+    }
+    NSLog(@"textFieldShouldBeginEditing");    
+
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{    
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField
+{
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
 - (void)viewDidUnload {
     NSLog(@"calling viewDidUnload");
     [self setUsernameField:nil];
