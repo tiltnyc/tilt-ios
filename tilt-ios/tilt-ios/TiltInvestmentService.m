@@ -9,7 +9,16 @@
 #import "TiltInvestmentService.h"
 #import "TiltTeamInvestment.h"
 
+@interface TiltInvestmentService()
+
+@property (nonatomic) BOOL isClassInitialized;
+
+@end
+
 @implementation TiltInvestmentService
+
+@synthesize isClassInitialized;
+
 
 -(void) makeInvestment:(TiltInvestment *)investment
 {
@@ -21,12 +30,19 @@
     [tiltTeamInvestmentMapping mapAttributes:@"team", @"percentage", nil];
     
     [tiltInvestmentMapping mapRelationship:@"investments" withMapping:tiltTeamInvestmentMapping];
+    tiltInvestmentMapping.forceCollectionMapping = YES;
     
     RKObjectManager* manager = [RKObjectManager sharedManager];
+//    manager.serializationMIMEType = RKMIMETypeJSON;
     [manager.mappingProvider setSerializationMapping:tiltInvestmentMapping forClass:[TiltInvestment class]];
+    [manager.mappingProvider setSerializationMapping:tiltTeamInvestmentMapping forClass:[TiltTeamInvestment class]];
 
     RKObjectRouter *router = manager.router;
-    [router routeClass:[TiltInvestment class] toResourcePath:@"/investments.json" forMethod:RKRequestMethodPOST];
+    if( isClassInitialized == NO )
+    {
+        isClassInitialized = YES;
+        [router routeClass:[TiltInvestment class] toResourcePath:@"/investments.json" forMethod:RKRequestMethodPOST];
+    }
      
     [manager postObject:investment delegate:self];
 }
