@@ -31,6 +31,8 @@
 		8C93642F14D5A694004862E0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C93642914D5A694004862E0 /* Security.framework */; };
 		8C93643014D5A694004862E0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C93642A14D5A694004862E0 /* SystemConfiguration.framework */; };
 		8CE5BB8C14DDDDE900013A9A /* TiltInvestment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE5BB8B14DDDDE900013A9A /* TiltInvestment.m */; };
+		8CF4A94F14E6377000A4098D /* TiltRound.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF4A94E14E6377000A4098D /* TiltRound.m */; };
+		8CF4A95214E638C500A4098D /* TiltRoundInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF4A95114E638C500A4098D /* TiltRoundInfoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +111,10 @@
 		8C93642A14D5A694004862E0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8CE5BB8A14DDDDE900013A9A /* TiltInvestment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiltInvestment.h; sourceTree = "<group>"; };
 		8CE5BB8B14DDDDE900013A9A /* TiltInvestment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiltInvestment.m; sourceTree = "<group>"; };
+		8CF4A94D14E6377000A4098D /* TiltRound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiltRound.h; sourceTree = "<group>"; };
+		8CF4A94E14E6377000A4098D /* TiltRound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiltRound.m; sourceTree = "<group>"; };
+		8CF4A95014E638C500A4098D /* TiltRoundInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiltRoundInfoViewController.h; sourceTree = "<group>"; };
+		8CF4A95114E638C500A4098D /* TiltRoundInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiltRoundInfoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +199,8 @@
 				8C9363EE14D4868E004862E0 /* TiltTeamInvestmentsViewController.m */,
 				8C9363FB14D59638004862E0 /* TIInvestmentsFinalizedViewController.h */,
 				8C9363FC14D59638004862E0 /* TIInvestmentsFinalizedViewController.m */,
+				8CF4A95014E638C500A4098D /* TiltRoundInfoViewController.h */,
+				8CF4A95114E638C500A4098D /* TiltRoundInfoViewController.m */,
 			);
 			path = "tilt-ios";
 			sourceTree = "<group>";
@@ -230,6 +238,8 @@
 				8CE5BB8B14DDDDE900013A9A /* TiltInvestment.m */,
 				8C11279C14E36843008BAC1C /* TiltTeamInvestment.h */,
 				8C11279D14E36843008BAC1C /* TiltTeamInvestment.m */,
+				8CF4A94D14E6377000A4098D /* TiltRound.h */,
+				8CF4A94E14E6377000A4098D /* TiltRound.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -347,6 +357,8 @@
 				8CE5BB8C14DDDDE900013A9A /* TiltInvestment.m in Sources */,
 				8C852D4614E32EA200A0CDC9 /* TiltInvestmentService.m in Sources */,
 				8C11279E14E36843008BAC1C /* TiltTeamInvestment.m in Sources */,
+				8CF4A94F14E6377000A4098D /* TiltRound.m in Sources */,
+				8CF4A95214E638C500A4098D /* TiltRoundInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

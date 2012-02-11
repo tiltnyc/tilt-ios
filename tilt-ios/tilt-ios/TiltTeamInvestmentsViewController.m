@@ -62,7 +62,7 @@
 
 - (void)finalizeInvestments:(id)sender {
     TiltInvestment *investments = [[TiltInvestment alloc] init];
-    investments.round = [NSNumber numberWithInt:2];
+    investments.round = [NSNumber numberWithInt:1];
     
     NSMutableArray *teamInvestments = [[NSMutableArray alloc] init];
 
