@@ -22,20 +22,23 @@
 
 -(void) makeInvestment:(TiltInvestment *)investment
 {
-    RKObjectMapping *tiltInvestmentMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
-    tiltInvestmentMapping.rootKeyPath = @"investment";
-    [tiltInvestmentMapping mapAttributes:@"round", nil];
-    
-    RKObjectMapping *tiltTeamInvestmentMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
-    [tiltTeamInvestmentMapping mapAttributes:@"team", @"percentage", nil];
-    
-    [tiltInvestmentMapping mapRelationship:@"investments" withMapping:tiltTeamInvestmentMapping];
-    tiltInvestmentMapping.forceCollectionMapping = YES;
-    
     RKObjectManager* manager = [RKObjectManager sharedManager];
-//    manager.serializationMIMEType = RKMIMETypeJSON;
+    manager.serializationMIMEType = RKMIMETypeJSON;
+    
+    RKObjectMapping *tiltInvestmentMapping = [RKObjectMapping serializationMapping];    tiltInvestmentMapping.rootKeyPath = @"investment";
+    [tiltInvestmentMapping mapAttributes:@"round", nil];
+    tiltInvestmentMapping.forceCollectionMapping = YES;
+
+    
+    RKObjectMapping *tiltTeamInvestmentMapping = [RKObjectMapping serializationMapping]; 
+    [tiltTeamInvestmentMapping mapKeyPath:@"team" toAttribute:@"team"];
+    [tiltTeamInvestmentMapping mapKeyPath:@"percentage" toAttribute:@"percentage"];
+    
+    [tiltInvestmentMapping mapKeyPath:@"investments" toRelationship:@"investments" withMapping:tiltTeamInvestmentMapping serialize:YES];
+
     [manager.mappingProvider setSerializationMapping:tiltInvestmentMapping forClass:[TiltInvestment class]];
     [manager.mappingProvider setSerializationMapping:tiltTeamInvestmentMapping forClass:[TiltTeamInvestment class]];
+
 
     RKObjectRouter *router = manager.router;
     if( isClassInitialized == NO )
