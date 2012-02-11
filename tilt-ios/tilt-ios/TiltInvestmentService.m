@@ -48,6 +48,12 @@
     }
      
     [manager postObject:investment delegate:self];
+    
+    if (success) {
+        _successBlock = success;
+    } else if (failure) {
+        _failBlock = failure;
+    }
 }
 
 
