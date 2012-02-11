@@ -21,9 +21,9 @@
     
     RKClient* client = [RKClient clientWithBaseURL:@"http://tiltnyc.herokuapp.com"];  
     RKObjectManager* manager = [RKObjectManager objectManagerWithBaseURL:client.baseURL];
-    NSLog(@"I am your RKClient singleton : %@", [RKClient sharedClient]);
-    NSLog(@"I am your RKObjectManager singleton: %@", manager);
-    NSLog(@"Client mem address: %@", client);
+    DLog(@"I am your RKClient singleton : %@", [RKClient sharedClient]);
+    DLog(@"I am your RKObjectManager singleton: %@", manager);
+    DLog(@"Client mem address: %@", client);
     
     RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
     RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);

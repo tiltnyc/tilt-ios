@@ -51,7 +51,7 @@
 }
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error {
-    NSLog(@"Encountered an error: %@", error);
+    DLog(@"Encountered an error: %@", error);
 }
 
 -(void) viewWillAppear:(BOOL)animated

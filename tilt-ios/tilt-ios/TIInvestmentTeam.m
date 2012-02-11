@@ -18,7 +18,7 @@
 -(BOOL) isIncreasingWith :(NSNumber *) newPercentageInvestment
 {
     
-    NSLog(@"lastPercentInvested for %@ = %@, and newinvestment is %@", self.name, self.percentInvested, newPercentageInvestment);
+    DLog(@"lastPercentInvested for %@ = %@, and newinvestment is %@", self.name, self.percentInvested, newPercentageInvestment);
     
     NSComparisonResult result = [lastPercentInvested compare:newPercentageInvestment];
     
@@ -58,7 +58,7 @@
     //save the old value
     lastPercentInvested = _percentInvested;
     
-    NSLog(@"incoming set value=%@",percentInvested);
+    DLog(@"incoming set value=%@",percentInvested);
     
     _percentInvested = percentInvested;
 }
@@ -83,7 +83,7 @@
         _percentInvested = [NSNumber numberWithInt:100];
     }
     
-    NSLog(@"percentInvested %@", _percentInvested);
+    DLog(@"percentInvested %@", _percentInvested);
     
     return _percentInvested;
 }

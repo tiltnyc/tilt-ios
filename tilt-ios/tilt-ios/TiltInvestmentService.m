@@ -60,27 +60,27 @@
 - (void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response
 {
     if (![response isError]) {
-        NSLog(@"Success"); 
-        NSLog(@"Response was: %@", response.bodyAsString);
+        DLog(@"Success"); 
+        DLog(@"Response was: %@", response.bodyAsString);
         _successBlock();
     } else {
-        NSLog(@"Error Descrip: %@, Error: %@", [response failureErrorDescription], [response failureError]);
+        DLog(@"Error Descrip: %@, Error: %@", [response failureErrorDescription], [response failureError]);
         _failBlock();
     }
 }
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObject:(id)object {
-    NSLog(@"Success");
+    DLog(@"Success");
     _successBlock();
 }
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObjects:(NSArray *)objects {
-    NSLog(@"Success");
+    DLog(@"Success");
     _successBlock();
 }
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error {
-    NSLog(@"Encountered an error: %@", error);
+    DLog(@"Encountered an error: %@", error);
     _failBlock();
 }
 

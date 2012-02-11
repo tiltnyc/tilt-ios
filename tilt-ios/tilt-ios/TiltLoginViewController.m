@@ -30,8 +30,8 @@
 
 
 - (IBAction)onSigninPressed:(id)sender {
-    NSLog(@"Logging in with user %@", self.usernameField.text);
-    NSLog(@"Logging in with password %@", self.passwordField.text);
+    DLog(@"Logging in with user %@", self.usernameField.text);
+    DLog(@"Logging in with password %@", self.passwordField.text);
     
     RKObjectMapping *objectMapping = [RKObjectMapping mappingForClass:[TiltUser class]];
     [objectMapping mapKeyPath:@"_id" toAttribute:@"identifier"];
@@ -61,7 +61,7 @@
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error
 {
-    NSLog(@"Error while loading...%@", error);
+    DLog(@"Error while loading...%@", error);
     [self performSegueWithIdentifier:@"LoginFailed" sender:self];
 }
 
@@ -75,10 +75,10 @@
             user = returnedObject;
         }
     }
-    NSLog(@"Identifier: %@", user.identifier);
-    NSLog(@"username: %@", user.username);
-    NSLog(@"email: %@", user.email);
-    NSLog(@"funds: %@", user.funds);
+    DLog(@"Identifier: %@", user.identifier);
+    DLog(@"username: %@", user.username);
+    DLog(@"email: %@", user.email);
+    DLog(@"funds: %@", user.funds);
     if( [user.identifier length] != 0  )
     {
         [self performSegueWithIdentifier:@"LoginSuccess" sender:self];
@@ -104,15 +104,15 @@
         
         if ([response isOK]) {  
             // Success! Let's take a look at the data  
-            NSLog(@"Retrieved XML: %@", [response bodyAsString]);  
+            DLog(@"Retrieved XML: %@", [response bodyAsString]);  
         }  
         
     } else if ([request isPOST]) {  
         
         // Handling POST /other.json  
         if ([response isJSON]) {  
-            NSLog(@"Got a JSON response back from our POST! %@ %@", user.identifier, user.email);  
-            NSLog(@"Retrieved XML: %@", [response bodyAsString]);  
+            DLog(@"Got a JSON response back from our POST! %@ %@", user.identifier, user.email);  
+            DLog(@"Retrieved XML: %@", [response bodyAsString]);  
             NSArray *cookies = response.cookies;
             for ( int i =0; i < cookies.count ; i++ )
             {
@@ -124,7 +124,7 @@
         
         // Handling DELETE /missing_resource.txt  
         if ([response isNotFound]) {  
-            NSLog(@"The resource path '%@' was not found.", [request resourcePath]);  
+            DLog(@"The resource path '%@' was not found.", [request resourcePath]);  
         }  
     }  
 }  
@@ -202,7 +202,7 @@
     if(_selectedTextField == _passwordField){
         [_segControl setEnabled:NO forSegmentAtIndex:1];
     }
-    NSLog(@"textFieldShouldBeginEditing");    
+    DLog(@"textFieldShouldBeginEditing");    
 
     return YES;
 }
@@ -234,7 +234,7 @@
 
 
 - (void)viewDidUnload {
-    NSLog(@"calling viewDidUnload");
+    DLog(@"calling viewDidUnload");
     [self setUsernameField:nil];
     [self setPasswordField:nil];
     [super viewDidUnload];

@@ -122,12 +122,12 @@
         total = [totalInvestedPercent intValue];
         int teamInvestment = [team.percentInvested intValue];
         total += teamInvestment;
-        NSLog(@"total is %d", total);
-        NSLog(@"team %@ has %@", team.name, team.percentInvested);
+        DLog(@"total is %d", total);
+        DLog(@"team %@ has %@", team.name, team.percentInvested);
         totalInvestedPercent = [NSNumber numberWithInt:total];
     }
     
-    NSLog(@"Returing max available investment of %i",100-total);
+    DLog(@"Returing max available investment of %i",100-total);
     
     return [NSNumber numberWithInt:100-total];
 }
@@ -142,11 +142,11 @@
         int total = [totalInvestedPercent intValue];
         int teamInvestment = [team.percentInvested intValue];
         total += teamInvestment;
-        NSLog(@"total is %d", total);
-        NSLog(@"team %@ has %@", team.name, team.percentInvested);
+        DLog(@"total is %d", total);
+        DLog(@"team %@ has %@", team.name, team.percentInvested);
         totalInvestedPercent = [NSNumber numberWithInt:total];
     }
-    NSLog(@"totalInvestedPercent is: %@", totalInvestedPercent);
+    DLog(@"totalInvestedPercent is: %@", totalInvestedPercent);
 
     NSComparisonResult result = [totalInvestedPercent compare:[NSNumber numberWithInt:100]];
     
@@ -160,7 +160,7 @@
 
 
 -(void)sliderUpdate:(UISlider *)sender {
-    NSLog(@"test moving the slider");
+    DLog(@"test moving the slider");
     
     if( [sender isKindOfClass:[UISlider class]] )
     {
@@ -219,7 +219,7 @@
                 {
                     NSNumber *maxAvailable = [self maxAvailableInvestmentLeft];
                     NSNumber *maxPlusCurrent = [NSNumber numberWithInt:[maxAvailable intValue] + [team.percentInvested intValue]];
-                    NSLog(@"MaxPlusCurrent: %@, MaxAvail: %@, vs PercentToInvest: %@",maxPlusCurrent, maxAvailable, percentToInvest);
+                    DLog(@"MaxPlusCurrent: %@, MaxAvail: %@, vs PercentToInvest: %@",maxPlusCurrent, maxAvailable, percentToInvest);
                     
                     NSComparisonResult maxPlusCurrentComparedToInvested = [maxPlusCurrent compare:percentToInvest];
                     if( maxPlusCurrentComparedToInvested == NSOrderedAscending || maxPlusCurrentComparedToInvested == NSOrderedSame )
@@ -238,9 +238,9 @@
                 UILabel *investmentPercent = (UILabel *)[[cell superview] viewWithTag:2];
                 investmentPercent.text = [NSString stringWithFormat:@"%@",team.percentInvested];
                 
-                NSLog(@"Max Available right now is %@",[self maxAvailableInvestmentLeft]);
-                NSLog(@"Value of percentInvested=%@",percentToInvest);
-                NSLog(@"Value of team.percentInvested=%@",team.percentInvested);
+                DLog(@"Max Available right now is %@",[self maxAvailableInvestmentLeft]);
+                DLog(@"Value of percentInvested=%@",percentToInvest);
+                DLog(@"Value of team.percentInvested=%@",team.percentInvested);
             }
         }
         
@@ -278,7 +278,7 @@
     
     teamName.text = teamInvestment.name;
     
-    NSLog(@"Team %@ has a investment of value %@", teamInvestment.name, teamInvestment.percentInvested);
+    DLog(@"Team %@ has a investment of value %@", teamInvestment.name, teamInvestment.percentInvested);
     
     investmentPercent.text = [NSString stringWithFormat:@"%@",teamInvestment.percentInvested];
     
@@ -295,7 +295,7 @@
 }
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error {
-    NSLog(@"Encountered an error: %@", error);
+    DLog(@"Encountered an error: %@", error);
 }
 
 - (void)reachabilityDidChange:(NSNotification *)notification {
