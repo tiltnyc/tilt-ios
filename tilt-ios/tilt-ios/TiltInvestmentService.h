@@ -10,8 +10,12 @@
 #import <RestKit/RestKit.h>
 #import "TiltInvestment.h"
 
+typedef void (^SuccessBlock)();
+typedef void (^FailBlock)();
+
 @interface TiltInvestmentService : NSObject <RKObjectLoaderDelegate>
 
--(void) makeInvestment:(TiltInvestment *) investment;
+
+-(void) makeInvestment:(TiltInvestment *) investment withSuccess: (SuccessBlock)success withFailure: (FailBlock)failure;
 
 @end

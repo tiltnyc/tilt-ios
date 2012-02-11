@@ -47,19 +47,6 @@
     return _cellTag;
 }
 
-/**
- if( self.navSimulator == YES )
- {
- self.navSimulator = NO;
- [self performSegueWithIdentifier:@"InvestmentsFinalized" sender:self];
- }
- else
- {
- self.navSimulator = YES;
- [self performSegueWithIdentifier:@"InvestmentsFailed" sender:self];
- }
- */
-
 - (void)finalizeInvestments:(id)sender {
     TiltInvestment *investments = [[TiltInvestment alloc] init];
     investments.round = [NSNumber numberWithInt:1];
@@ -80,7 +67,13 @@
     }
     
     investments.investments = teamInvestments;
-    [self.service makeInvestment:investments];
+    [self.service makeInvestment:investments 
+                     withSuccess:^{
+                         [self performSegueWithIdentifier:@"InvestmentsFinalized" sender:self];
+                     } 
+                     withFailure:^{
+                          [self performSegueWithIdentifier:@"InvestmentsFailed" sender:self];
+                     }];
 }
 
 

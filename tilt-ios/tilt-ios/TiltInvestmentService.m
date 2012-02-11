@@ -20,7 +20,7 @@
 @synthesize isClassInitialized;
 
 
--(void) makeInvestment:(TiltInvestment *)investment
+-(void) makeInvestment:(TiltInvestment *) investment withSuccess: (SuccessBlock)success withFailure: (FailBlock)failure;
 {
     RKObjectManager* manager = [RKObjectManager sharedManager];
     manager.serializationMIMEType = RKMIMETypeJSON;
@@ -53,7 +53,8 @@
 
 - (void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response
 {
-    NSLog(@"Success");  
+    NSLog(@"Success"); 
+    NSLog(@"Response was: %@", response.body);
 }
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObject:(id)object {
