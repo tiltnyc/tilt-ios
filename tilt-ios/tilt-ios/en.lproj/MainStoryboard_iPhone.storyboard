@@ -100,6 +100,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="investments by team" id="5Bi-GS-S8X">
                         <barButtonItem key="backBarButtonItem" title="logout" id="gZH-HE-Gbu"/>
+                        <barButtonItem key="rightBarButtonItem" title="Info" id="SKN-wW-pFm">
+                            <connections>
+                                <segue destination="OtN-Sd-Num" kind="push" id="oZ2-SR-DgC"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="six-QB-fas" kind="push" identifier="InvestmentsFailed" id="oH0-Sc-WoM"/>
@@ -213,25 +218,57 @@
             </objects>
             <point key="canvasLocation" x="1328" y="359"/>
         </scene>
+        <scene sceneID="dRt-s9-81t">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xuo-DY-LbY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="OtN-Sd-Num" customClass="TiltRoundInfoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0u4-s6-1MM">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="you have this much cash monies:" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="gqZ-gH-f5B">
+                                <rect key="frame" x="20" y="144" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="$$$$" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="1Ns-d4-YyE">
+                                <rect key="frame" x="20" y="182" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Your currently bidding on round: " textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="glt-kA-GUD">
+                                <rect key="frame" x="20" y="63" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="qF5-Zp-czP">
+                                <rect key="frame" x="20" y="11" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="round info" id="TRK-Em-vac"/>
+                    <connections>
+                        <outlet property="availableCashLabel" destination="1Ns-d4-YyE" id="sWS-3W-GH2"/>
+                        <outlet property="currentRoundLabel" destination="glt-kA-GUD" id="ump-tT-DxP"/>
+                        <outlet property="openOrClosedLabel" destination="qF5-Zp-czP" id="0TM-J7-zOD"/>
+                        <outlet property="view" destination="0u4-s6-1MM" id="bsg-Ye-1ew"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1328" y="-854"/>
+        </scene>
     </scenes>
-    <classes>
-        <class className="TIInvesmentsFailedViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TIInvesmentsFailedViewController.h"/>
-        </class>
-        <class className="TIInvestmentsFinalizedViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TIInvestmentsFinalizedViewController.h"/>
-        </class>
-        <class className="TiltLoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TiltLoginViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="usernameField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="TiltTeamInvestmentsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TiltTeamInvestmentsViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

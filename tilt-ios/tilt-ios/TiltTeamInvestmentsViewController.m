@@ -62,7 +62,7 @@
 
 - (void)finalizeInvestments:(id)sender {
     TiltInvestment *investments = [[TiltInvestment alloc] init];
-    investments.round = [NSNumber numberWithInt:4];
+    investments.round = [NSNumber numberWithInt:1];
     
     NSMutableArray *teamInvestments = [[NSMutableArray alloc] init];
 
@@ -70,7 +70,11 @@
         
         TiltTeamInvestment *investment = [[TiltTeamInvestment alloc] init];
         investment.team = (NSNumber *)[team.identifier copy];
-        investment.percentage = (NSNumber *)[team.percentInvested copy];
+        
+        double percentage = [(NSNumber *)[team.percentInvested copy] doubleValue];
+        double valueAfterConversion = percentage / 100;
+        
+        investment.percentage = [NSNumber numberWithDouble:valueAfterConversion];
         
         [teamInvestments addObject:investment];
     }

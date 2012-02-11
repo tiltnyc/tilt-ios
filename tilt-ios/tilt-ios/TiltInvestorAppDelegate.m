@@ -9,6 +9,8 @@
 #import "TiltInvestorAppDelegate.h"
 #import <RestKit/RestKit.h>
 
+#import "TiltRound.h"
+
 @implementation TiltInvestorAppDelegate
 
 @synthesize window = _window;
@@ -28,6 +30,16 @@
 
     RKLogConfigureByName("RestKit/Network/Queue", RKLogLevelTrace);
     RKLogConfigureByName("RestKit/Network/Reachability", RKLogLevelTrace);
+    
+    
+    RKObjectMapping *objectMapping = [RKObjectMapping mappingForClass:[TiltRound class]];
+    [objectMapping mapKeyPath:@"allocated" toAttribute:@"allocated"];
+    [objectMapping mapKeyPath:@"is_open" toAttribute:@"isOpen"];
+    [objectMapping mapKeyPath:@"number" toAttribute:@"number"];
+    
+    [manager.mappingProvider setMapping:objectMapping forKeyPath:@""]; 
+    
+    [[manager router] routeClass:[TiltRound class] toResourcePath:@"/rounds/current.json"];
     
     client.cachePolicy = RKRequestCachePolicyNone;
     
