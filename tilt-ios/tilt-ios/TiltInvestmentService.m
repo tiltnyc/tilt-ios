@@ -61,18 +61,22 @@
 {
     NSLog(@"Success"); 
     NSLog(@"Response was: %@", response.body);
+    _successBlock();
 }
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObject:(id)object {
     NSLog(@"Success");
+    _successBlock();
 }
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObjects:(NSArray *)objects {
     NSLog(@"Success");
+    _successBlock();
 }
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error {
     NSLog(@"Encountered an error: %@", error);
+    _failBlock();
 }
 
 @end
